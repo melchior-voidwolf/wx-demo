@@ -50,7 +50,7 @@ class HomePage extends Component {
       <MomentTimeline />
       <MomentTimeline />
       <MomentTimeline />
-      {titleOpacity!== 0 && <Titlebar style={{opacity: titleOpacity}} />}
+      <Titlebar style={{opacity: titleOpacity}} />
     </div>
   }
 }
