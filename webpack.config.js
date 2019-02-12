@@ -37,6 +37,11 @@ const config = {
     historyApiFallback: true,
     compress: true,
     open: false,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'X-Frame-Options': 'ALLOW-FROM *',
+    },
   },
   resolve: {
     alias: {

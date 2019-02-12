@@ -3,6 +3,15 @@ import React, { Component } from 'react'
 import MomentTimeline from '@component/MomentTimeline'
 import Titlebar from '@component/Titlebar'
 
+const momentText =
+`稳扎稳打被憋我憋不出稳扎稳打被
+憋我憋不出稳扎稳打被憋我憋不出稳扎稳
+
+打被憋我憋不出稳扎稳打被憋我憋不出稳扎
+稳打被憋我憋不出稳扎稳打被憋我憋不出稳扎
+
+稳打被憋我憋不出稳扎稳打被憋我憋不出`
+
 class HomePage extends Component {
   state = {
     titleOpacity: 0
@@ -31,7 +40,7 @@ class HomePage extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.titlebarStyleProcess)
   }
-  componentWillMount() {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.titlebarStyleProcess)
   }
   render() {
@@ -46,10 +55,10 @@ class HomePage extends Component {
           <div className="user-avator"></div>
         </div>
       </div>
-      <MomentTimeline />
-      <MomentTimeline />
-      <MomentTimeline />
-      <MomentTimeline />
+      <MomentTimeline momentText={momentText} />
+      <MomentTimeline momentText={momentText} />
+      <MomentTimeline momentText={'我爱吃黄桃我爱吃黄桃我爱吃黄桃'} />
+      <MomentTimeline momentText={momentText} />
       <Titlebar style={{opacity: titleOpacity}} />
     </div>
   }

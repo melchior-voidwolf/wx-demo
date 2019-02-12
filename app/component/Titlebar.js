@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 
 export default class Titlebar extends Component {
   render() {
-    const {style = {}} = this.props
+    const {title = '朋友圈', style = {}, onBack = false} = this.props
     return <div className='wx-titlebar-container' style={style}>
       <div className="wx-titlebar">
-        <div className="title-text">朋友圈</div>
+        <div
+          onClick={onBack || (() => {})}
+          className="left-button">{onBack ? '<' : ''}</div>
+        <div className="title-text">{title}</div>
+        <div className="right-button"></div>
       </div>
     </div>
   }
