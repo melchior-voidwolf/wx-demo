@@ -56,11 +56,27 @@
                 font-size 16px 
                 color: #576b95
 
+            .text-content-wrapper
+                padding: 4px 0
+
             .user-text-content
                 line-height 20px
                 font-size 16px
                 color: #000000
-                padding: 4px 0
+            
+            .user-text-content-hide
+                overflow hidden;
+                text-overflow: ellipsis
+                display: -webkit-box
+                -webkit-line-clamp: 3
+                -webkit-box-orient: vertical
+            
+
+            .content-control-button
+                line-height 16px
+                font-size 16px
+                color #576b95
+                margin: 10px 0
             
             .user-action-line
                 margin-top 10px
@@ -75,7 +91,7 @@
                     color #c9c9c9
 
                     .other-info
-                        padding-left: 5px
+                        padding-left 5px
 
                 .enable-action-line-button
                     height 20px
