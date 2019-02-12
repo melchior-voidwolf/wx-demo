@@ -1,2 +1,93 @@
 .home-page
-    color #0084ff
+    .user-background-wall
+        background: #ffffff
+        height 365px
+        position relative
+
+        .wall-background-pic
+            height 300px
+            background #494949
+            display flex
+            flex-flow row nowrap
+            align-items center
+            justify-content center
+
+            .change-button
+                color #292929
+                line-height: 80px
+                font-size 15px
+                text-shadow: 0.01em 0.04em #333;
+        .user-name
+            line-height: 18px
+            font-size: 18px
+            color: #fffbf2
+            position absolute
+            right 107px
+            top: 270px
+            text-shadow: 0.01em 0.1em #333;
+        .user-avator
+            height 70px
+            width 70px
+            border-radius: 10px
+            background: #0084ff   
+            position absolute
+            right 12px
+            top: 250px
+
+    .moment-timeline-block
+        display flex
+        flex-flow row nowrap
+        padding 16px 10px 10px 10px
+        border-bottom-one-px()
+
+        .user-avator
+            height 42px
+            width 42px
+            border-radius 5px
+            background #0084ff
+            margin-right 10px
+        
+        .moment-main
+            flex 1
+            flex-flow column nowrap
+
+            .user-name
+                line-height 20px
+                font-size 16px 
+                color: #576b95
+
+            .user-text-content
+                line-height 20px
+                font-size 16px
+                color: #000000
+                padding: 4px 0
+            
+            .user-action-line
+                margin-top 10px
+                height 20px
+                display flex
+                flex-flow row nowrap
+
+                .post-info
+                    flex 1
+                    line-height 20px
+                    font-size 14px
+                    color #c9c9c9
+
+                    .other-info
+                        padding-left: 5px
+
+                .enable-action-line-button
+                    height 20px
+                    line-height 20px
+                    border-radius 3px
+                    font-size 16px
+                    width 33px
+                    background #f7f7f7
+                    color: #576b95
+                    text-align center
+
+                
+
+            
+        
