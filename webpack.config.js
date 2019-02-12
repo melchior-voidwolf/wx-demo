@@ -42,6 +42,7 @@ const config = {
     alias: {
       '@': path.resolve(__dirname, 'app'),
       '@page': path.resolve(__dirname, 'app', 'page'),
+      '@component': path.resolve(__dirname, 'app', 'component'),
       '@style': path.resolve(__dirname, 'app', 'style'),
     },
     modules: ['node_modules'],
