@@ -7,7 +7,7 @@ export default class Titlebar extends Component {
       <div className="wx-titlebar">
         <div
           onClick={onBack || (() => {})}
-          className="left-button">{onBack ? '<' : ''}</div>
+          className="left-button">{onBack ? <i className='iconfont icon-left' /> : ''}</div>
         <div className="title-text">{title}</div>
         <div className="right-button"></div>
       </div>
