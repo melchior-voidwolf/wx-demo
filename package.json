@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack -p --progress --colors --mode production",
     "lint": "eslint app/",
     "fix": "eslint app/ --fix",
-    "bundle-analyze": "cross-env NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer ./stats.json"
+    "bundle-analyze": "webpack --profile --json > bundle-info.json && webpack-bundle-analyzer ./bundle-info.json"
   },
   "repository": {
     "type": "git",

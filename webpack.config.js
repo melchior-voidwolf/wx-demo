@@ -1,8 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
 
-console.log(process.env.NODE_ENV)
-
 const config = {
   mode: 'production',
   entry: path.resolve(__dirname, 'app/App.js'),
@@ -38,7 +36,7 @@ const config = {
     contentBase: path.resolve(__dirname, 'public'),
     historyApiFallback: true,
     compress: true,
-    open: true
+    open: false,
   },
   resolve: {
     alias: {
