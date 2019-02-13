@@ -255,7 +255,7 @@ export default class MomentTimeline extends Component {
         <div className="mask" onTouchMove={this.cancelInput}  onClick={this.cancelInput}></div>
         <div className="reply-input-wrapper">
           <input
-          autofocus="autofocus" 
+            autoFocus="autofocus"
             onKeyUp={ e =>
               e.keyCode === 13 && this.postReply()
             }

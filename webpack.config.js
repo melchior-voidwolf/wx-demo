@@ -62,6 +62,7 @@ const config = {
       '@': path.resolve(__dirname, 'app'),
       '@page': path.resolve(__dirname, 'app', 'page'),
       '@component': path.resolve(__dirname, 'app', 'component'),
+      '@util': path.resolve(__dirname, 'app', 'util'),
       '@style': path.resolve(__dirname, 'app', 'style'),
     },
     modules: ['node_modules'],

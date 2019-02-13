@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import MomentTimeline from '@component/MomentTimeline'
 import Titlebar from '@component/Titlebar'
+import BodyScrollStausManager from '@util/BodyScrollStausManager'
 
 const momentText =
 `世之奇伟、瑰怪、非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也
@@ -52,39 +53,36 @@ const picList6 = [
   { name: 'vw.jpg', uri: '/img/vw.jpg', id: 7 },
 ]
 
+const getTitleBarOpacity = distance => {
+  if (distance < 205) { return 0 }
+  if (distance > 275) { return 1 }
+  return (distance - 205)/70
+}
+
+@BodyScrollStausManager()
 class HomePage extends Component {
   state = {
-    titleOpacity: 0
+    page: 1
   }
-  titlebarStyleProcess = () => {
-    const {titleOpacity} = this.state
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-    if (scrollTop < 205) {
-      if (titleOpacity === 0) {
-        return null
-      } else {
-        this.setState({titleOpacity: 0})
-        return null
+  componentDidMount(){
+    this.props.topic.addListener({
+      next: async e => {
+        const { action } = e
+        if (action === 'LOAD_MORE') {
+          this.setState({
+            page: this.state.page+1
+          }, this.props.unLock)
+        }
       }
-    }
-    if (scrollTop > 275) {
-      if (titleOpacity === 1) {
-        return null
-      } else {
-        this.setState({titleOpacity: 1})
-        return null
-      }
-    }
-    this.setState({titleOpacity: (scrollTop - 205)/60 })
+    })
   }
-  componentDidMount() {
-    window.addEventListener('scroll', this.titlebarStyleProcess)
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.titlebarStyleProcess)
+  refresh = () => {
+    this.setState({
+      page: 1
+    }, this.props.scrollToTopWithSpeed)
   }
   render() {
-    const {titleOpacity} = this.state
+    const { scrollTop } = this.props
     return <div className='home-page'>
       <div className="user-background-wall">
         <div className="user-background-wall">
@@ -95,13 +93,20 @@ class HomePage extends Component {
           <div className="user-avator"></div>
         </div>
       </div>
-      <MomentTimeline momentText={momentText} picList={picList} />
-      <MomentTimeline momentText={momentText} picList={picList6}/>
-      <MomentTimeline momentText={momentText} picList={picList2} weblink={wlDemo} />
-      <MomentTimeline momentText={'我爱写代码我爱写代码'} picList={picList3} />
-      <MomentTimeline momentText={momentText} picList={picList4}/>
-      <MomentTimeline momentText={momentText} picList={picList5}/>
-      <Titlebar style={{opacity: titleOpacity}} />
+      {
+        [...'1'.repeat(this.state.page)].map((_, i) => [
+          <MomentTimeline momentText={momentText} picList={picList} />,
+          <MomentTimeline momentText={momentText} picList={picList6}/>,
+          <MomentTimeline momentText={momentText} picList={picList2} weblink={wlDemo} />,
+          <MomentTimeline momentText={'我爱写代码我爱写代码'} picList={picList3} />,
+          <MomentTimeline momentText={momentText} picList={picList4}/>,
+          <MomentTimeline momentText={momentText} picList={picList5}/>,
+        ])
+      }
+      <Titlebar
+        onDoubleClick={this.refresh}
+        style={{opacity: getTitleBarOpacity(scrollTop)}}
+      />
     </div>
   }
 }
