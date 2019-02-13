@@ -29,6 +29,19 @@ const config = {
           },
           'stylus-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules\/(?!(react-wx-images-viewer))/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: process.env.NODE_ENV !== 'production'
+            }
+          },
+        ]
       }
     ]
   },
@@ -37,6 +50,7 @@ const config = {
     historyApiFallback: true,
     compress: true,
     open: false,
+    host: '0.0.0.0',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',

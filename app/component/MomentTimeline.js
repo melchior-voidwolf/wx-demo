@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import WxImageViewer from 'react-wx-images-viewer'
 
 import Weblink from '@component/Weblink'
 
@@ -12,7 +13,9 @@ export default class MomentTimeline extends Component {
     state = {
       textOverMode: false,
       displayAll: false,
-      textOverCheck: false
+      textOverCheck: false, 
+      isOpen: false,
+      index: 0,
     }
     reveseContentDisplayStatus = () => {
       this.setState({
@@ -69,9 +72,13 @@ export default class MomentTimeline extends Component {
       </div>
     }
     renderPics = () => {
-      const { picList = [] } = this.props
+      const picList = (this.props.picList || []).map((_, i) => ({
+        ..._,
+        picIndex: i
+      }))
       const SquarePic = props => <div
         key={props.id}
+        onClick={this.openViewer(props.picIndex)}
         style={{
           background: `url(${props.uri}) no-repeat center center / cover`
         }}
@@ -81,7 +88,7 @@ export default class MomentTimeline extends Component {
       if (picList.length === 0) { return null }
       if (picList.length === 1) {
         return <div className="moment-pic-wrapper">
-          <img src={picList[0].uri} alt={picList[0].name} className="single-pic"/>
+          <img onClick={this.openViewer(0)} src={picList[0].uri} alt={picList[0].name} className="single-pic"/>
         </div>
       }
       if (picList.length === 2 || picList.length === 3) {
@@ -135,6 +142,25 @@ export default class MomentTimeline extends Component {
         </div>
       }
     }
+    renderImgViewer = () => {
+      const { picList = [] } = this.props
+      const { isOpen, index } = this.state
+      if (picList.length === 0) { return null }
+      if (!isOpen) {return null}
+      return <WxImageViewer onClose={this.onClose} urls={picList.map(_ => _.uri)} index={index}/>
+    }
+    onClose = () => {
+      this.setState({
+        isOpen: false,
+        index: 0
+      })
+    } 
+    openViewer = index => () => {
+      this.setState({
+        index,
+        isOpen: true
+      })
+    }
     renderWebLink = () => {
       const { weblink } = this.props
       return (!!weblink) && <Weblink {...weblink} />
@@ -157,6 +183,7 @@ export default class MomentTimeline extends Component {
             { this.renderCommentText() }
             { this.renderTextControlButton() }
             { this.renderPics() }
+            { this.renderImgViewer() }
             { this.renderWebLink() }
             { this.renderActionLine() }
           </div>

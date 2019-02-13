@@ -4,3 +4,5 @@ public/js
 bundle-info.json
 
 .DS_Store
+
+yarn-error.log
