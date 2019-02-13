@@ -63,7 +63,7 @@ export default function BodyScrollStausManager (activePx = 100, startScrollTop =
       scrollToTopWithSpeed = () => {
         let gotoTop= () => {
           let currentPosition = document.documentElement.scrollTop || document.body.scrollTop
-          currentPosition -= 10*(currentPosition/400) + 0.5
+          currentPosition -= 10*(currentPosition/500) + 0.5
           if (currentPosition > 0) {
             window.scrollTo(0, currentPosition)
           }

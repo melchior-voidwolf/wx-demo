@@ -6,9 +6,9 @@ export default class Weblink extends Component {
       router: PropTypes.object.isRequired
     }
     render() {
-      const { uri, intro } = this.props
+      const { uri, intro, icon } = this.props
       return <div className="webpage-link" onClick={() => this.context.router.history.push(`/webview?intro=${intro}&uri=${uri}`)}>
-        <div className="webpage-icon"></div>
+        <div className="webpage-icon" style={{background: `url(${icon}) no-repeat center center / cover`}} ></div>
         <div className="webpage-title">{intro}</div>
       </div>
     }

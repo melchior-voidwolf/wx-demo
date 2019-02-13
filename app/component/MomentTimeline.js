@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import WxImageViewer from 'react-wx-images-viewer'
+import moment from 'moment'
 
 import Weblink from '@component/Weblink'
+
+moment.locale('zh-cn')
 
 const renderTextWithLines = str =>
   str.split('\n')
@@ -9,26 +12,23 @@ const renderTextWithLines = str =>
       (_, i) => <p className='moment-text-line' key={i}>{_}</p>
     )
 
-const friendComments = [
-  { user: '子阳', to: null, comment: '今天这个代码好难写鸭' },
-  { user: '韩昂', to: '子阳', comment: '加油啦' },
-]
-
 export default class MomentTimeline extends Component {
-    state = {
+  constructor(props) {
+    super(props)
+    this.state = {
       textOverMode: false,
       displayAll: false,
       textOverCheck: false,
       isOpen: false,
       index: 0,
       actionBar: false,
-      likeList: ['zizi'],
-      friendComments: friendComments,
+      likeList: props.likeList,
+      friendComments: props.friendComments,
       tempReply: '',
       replyMode: false,
       replyTarget: {},
-      user: '空破'
     }
+  }
     reveseActionBarStatus = () => {
       this.setState({actionBar: !this.state.actionBar})
     }
@@ -195,10 +195,11 @@ export default class MomentTimeline extends Component {
     }
     renderActionLine = () => {
       const { actionBar } = this.state
+      const { created, from } = this.props
       return <div className="user-action-line">
         <div className="post-info">
-          3小时前
-          <span className="other-info">知乎APP</span>
+          {moment(created).fromNow()}
+          {from ? <span className="other-info">{from}</span> : null }
         </div>
         <div
           onClick={this.reveseActionBarStatus}
@@ -222,7 +223,7 @@ export default class MomentTimeline extends Component {
           likeList.length > 0 && <div className="like-list">
             <i className='iconfont icon-heart' />
             <span className="name-list">
-              {likeList.map((_, i) => <span className='user-name' key={i}>{_}</span>)}
+              {likeList.map((_, i) => <span className='user-name' key={i}>{_.name}</span>)}
             </span>
           </div>
         }
@@ -230,13 +231,14 @@ export default class MomentTimeline extends Component {
           friendComments.length > 0 && <div className='friend-comments'>
             {
               friendComments.map((_, i) => {
+                console.log(_)
                 return <div className='friend-comment-item' key={i} onClick={this.replayFriendComment(_)}>
-                  {_.user}
+                  {_.user.name}
                   {
                     _.to ?
                       <span>
                         <span className='normal-text'>回复</span>
-                        {_.to}
+                        {_.to.name}
                         <span className='normal-text'>:</span>
                       </span> :
                       <span className='normal-text'>:</span>
@@ -259,7 +261,7 @@ export default class MomentTimeline extends Component {
             onKeyUp={ e =>
               e.keyCode === 13 && this.postReply()
             }
-            placeholder={replyTarget.comment ? `回复${replyTarget.comment.user}` : '评论'}
+            placeholder={replyTarget.comment ? `回复${replyTarget.comment.user.name}` : '评论'}
             type="text" className="replay-input" onChange={this._handleInput} value={tempReply} />
           <div className="cancel-input" onClick={this.cancelInput}>取消</div>
         </div>
@@ -286,15 +288,16 @@ export default class MomentTimeline extends Component {
       })
     }
     postReply = () => {
-      const { friendComments, replyTarget, tempReply, user } = this.state
+      const { replyTarget, tempReply } = this.state
+      const {friendComments} = this.props
       if (tempReply.length <= 0) { return null }
       friendComments.push(
         replyTarget.comment ? {
-          user: '子空',
+          user: window.localUser,
           to: replyTarget.comment.user,
           comment: tempReply
         } : {
-          user: '子空',
+          user: window.localUser,
           comment: tempReply
         }
       )
@@ -306,12 +309,12 @@ export default class MomentTimeline extends Component {
       })
     }
     render() {
-      const { user } = this.state
+      const { user } = this.props
       return <div className="moment-timeline" ref='moment'>
         <div className="moment-timeline-block">
-          <div className="user-avator"></div>
+          <div className="user-avator" style={{background: `url(${user.avator}) no-repeat center center / cover`}} ></div>
           <div className="moment-main">
-            <div className="user-name">{user}</div>
+            <div className="user-name">{user.name}</div>
             { this.renderCommentText() }
             { this.renderTextControlButton() }
             { this.renderPics() }
