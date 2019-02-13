@@ -6,8 +6,7 @@ import Titlebar from '@component/Titlebar'
 const momentText =
 `世之奇伟、瑰怪、非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也
 苟利国家生死以
-在使用React时需要给页面绑定一个键盘按下的事件，绑定后按下键盘并没有反应
-`
+在使用React时需要给页面绑定一个键盘按下的事件，绑定后按下键盘并没有反应`
 
 const wlDemo = {
   uri: 'http://www.zuimoban.com/jiaocheng/htmlcss/11742.html',

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import WxImageViewer from 'react-wx-images-viewer'
 
 import Weblink from '@component/Weblink'
-import { list } from 'postcss'
 
 const renderTextWithLines = str =>
   str.split('\n')
@@ -27,7 +26,7 @@ export default class MomentTimeline extends Component {
       friendComments: friendComments,
       tempReply: '',
       replyMode: false,
-      replayInfo: {},
+      replyTarget: {},
       user: '空破'
     }
     reveseActionBarStatus = () => {
@@ -191,7 +190,7 @@ export default class MomentTimeline extends Component {
       this.setState ({
         actionBar: false,
         replyMode: true,
-        replayInfo: {},
+        replyTarget: {},
       })
     }
     renderActionLine = () => {
@@ -251,15 +250,16 @@ export default class MomentTimeline extends Component {
       </div>
     }
     renderReplyInput = () => {
-      const { replyMode, tempReply, replayTarget } = this.state
+      const { replyMode, tempReply, replyTarget } = this.state
       return replyMode && <div className="reply-input">
-        <div className="mask" onClick={() => this.setState({replyMode: false})}></div>
+        <div className="mask" onTouchMove={this.cancelInput}  onClick={this.cancelInput}></div>
         <div className="reply-input-wrapper">
           <input
+          autofocus="autofocus" 
             onKeyUp={ e =>
               e.keyCode === 13 && this.postReply()
             }
-            placeholder={replayTarget.comment ? `回复${replayTarget.comment.user}` : '评论'}
+            placeholder={replyTarget.comment ? `回复${replyTarget.comment.user}` : '评论'}
             type="text" className="replay-input" onChange={this._handleInput} value={tempReply} />
           <div className="cancel-input" onClick={this.cancelInput}>取消</div>
         </div>
@@ -267,7 +267,7 @@ export default class MomentTimeline extends Component {
     }
     replayFriendComment = (comment) => () => {
       this.setState({
-        replayTarget: {comment},
+        replyTarget: {comment},
         tempReply: '',
         replyMode: true,
       })
@@ -280,27 +280,26 @@ export default class MomentTimeline extends Component {
     }
     cancelInput = () => {
       this.setState({
-        replayTarget: {},
+        replyTarget: {},
         tempReply: '',
         replyMode: false,
       })
     }
     postReply = () => {
-      const { friendComments, replayInfo, tempReply, user } = this.state
+      const { friendComments, replyTarget, tempReply, user } = this.state
       if (tempReply.length <= 0) { return null }
       friendComments.push(
-        replayInfo.comment ? {
+        replyTarget.comment ? {
           user: '子空',
-          to: replayInfo.user,
+          to: replyTarget.comment.user,
           comment: tempReply
         } : {
           user: '子空',
-          to: user,
           comment: tempReply
         }
       )
       this.setState({
-        replayTarget: {},
+        replyTarget: {},
         tempReply: '',
         replyMode: false,
         friendComments,
