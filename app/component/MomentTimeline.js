@@ -13,9 +13,14 @@ export default class MomentTimeline extends Component {
     state = {
       textOverMode: false,
       displayAll: false,
-      textOverCheck: false, 
+      textOverCheck: false,
       isOpen: false,
       index: 0,
+      actionBar: false,
+      likeList: [],
+    }
+    reveseActionBarStatus = () => {
+      this.setState({actionBar: !this.state.actionBar})
     }
     reveseContentDisplayStatus = () => {
       this.setState({
@@ -96,7 +101,7 @@ export default class MomentTimeline extends Component {
           <div className="one-line-pic">
             { picList.map(SquarePic)}
             {
-              picList.length===2 && <DummyPic />
+              picList.length === 2 && <DummyPic />
             }
           </div>
         </div>
@@ -154,7 +159,7 @@ export default class MomentTimeline extends Component {
         isOpen: false,
         index: 0
       })
-    } 
+    }
     openViewer = index => () => {
       this.setState({
         index,
@@ -165,17 +170,40 @@ export default class MomentTimeline extends Component {
       const { weblink } = this.props
       return (!!weblink) && <Weblink {...weblink} />
     }
+    likeit = () => {
+      this.setState ({
+        actionBar: false,
+        likeList: this.state.likeList.concat('子空')
+      })
+    }
+    sendComment = () => {
+      this.setState ({
+        actionBar: false,
+      })
+    }
     renderActionLine = () => {
+      const { actionBar } = this.state
       return <div className="user-action-line">
         <div className="post-info">
           3小时前
           <span className="other-info">知乎APP</span>
         </div>
-        <div className="enable-action-line-button">• •</div>
+        <div 
+          onClick={this.reveseActionBarStatus}
+          className="enable-action-line-button">
+          • •
+        </div>
+        <div className="action-button-bar-wrapper" style={actionBar ? {} : {width: 0}}>
+          <div className="action-button-bar">
+          <div className="action-button" onClick={this.likeit}><i className='iconfont icon-heart' /> 赞</div>
+          <div className="action-button" onClick={this.sendComment}><i className='iconfont icon-comment' /> 评论</div>
+          </div>
+        </div>
+        { actionBar && <div onTouchMove={this.reveseActionBarStatus} onClick={this.reveseActionBarStatus} className="mask"></div> }
       </div>
     }
     render() {
-      return <div className="moment-timeline">
+      return <div className="moment-timeline" ref='moment'>
         <div className="moment-timeline-block">
           <div className="user-avator"></div>
           <div className="moment-main">

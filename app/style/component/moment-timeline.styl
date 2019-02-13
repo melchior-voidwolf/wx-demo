@@ -77,6 +77,16 @@
                 height 20px
                 display flex
                 flex-flow row nowrap
+                position relative
+
+                .mask
+                    position fixed
+                    top: 0
+                    left 0
+                    height 100%
+                    width: 100%
+                    background: rgba(0,0,0, .01)
+                    z-index: 1
 
                 .post-info
                     flex 1
@@ -96,3 +106,46 @@
                     background #f7f7f7
                     color: #576b95
                     text-align center
+
+                .action-button-bar-wrapper
+                    position absolute
+                    right 40px
+                    bottom -10px
+                    width: 180px
+                    height 40px
+                    overflow hidden
+                    transition width .3s
+                    z-index 2
+
+                .action-button-bar
+                    width: 180px
+                    height 40px 
+                    background: #4c5254
+                    border-radius 5px
+                    display flex
+                    flex-flow row nowrap
+
+                    .action-button
+                        flex: 1
+                        text-align: center
+                        font-size: 15px
+                        line-height: 40px
+                        color: #fff
+                        position: relative
+
+                        &:after
+                            content: ' '
+                            background: #373d40
+                            height 40px
+                            width: 1px
+                            display inline-block
+                            position absolute
+                            right 0
+                            transform: scale(0.5)
+
+                        &:last-child
+                            &:after
+                                background transparent
+
+
+
