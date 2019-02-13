@@ -1,151 +1,202 @@
-    .moment-timeline-block
-        display flex
-        flex-flow row nowrap
-        padding 16px 9px 10px 9px
-        border-bottom-one-px()
+.moment-timeline-block
+    display flex
+    flex-flow row nowrap
+    padding 16px 9px 10px 9px
+    border-bottom-one-px()
 
-        .user-avator
-            height 42px
-            width 42px
-            border-radius 5px
-            background #0084ff
-            margin-right 10px
+    .user-avator
+        height 42px
+        width 42px
+        border-radius 5px
+        background #0084ff
+        margin-right 10px
+    
+    .moment-main
+        flex 1
+        flex-flow column nowrap
+
+        .user-name
+            line-height 20px
+            font-size 16px 
+            color: #576b95
+            font-weight 500
+
+        .text-content-wrapper
+            padding: 4px 0
+
+        .user-text-content
+            line-height 20px
+            font-size 15px
+            color: #000000
+
+            p.moment-text-line
+                min-height: 20px
         
-        .moment-main
-            flex 1
-            flex-flow column nowrap
+        .user-text-content-hide
+            overflow hidden
+            text-overflow: ellipsis
+            display: -webkit-box
+            -webkit-line-clamp: 3
+            -webkit-box-orient: vertical
 
-            .user-name
-                line-height 20px
-                font-size 16px 
-                color: #576b95
-                font-weight 500
+        .moment-pic-wrapper
+            margin: 10px 0
 
-            .text-content-wrapper
-                padding: 4px 0
-
-            .user-text-content
-                line-height 20px
-                font-size 15px
-                color: #000000
-
-                p.moment-text-line
-                    min-height: 20px
+            .single-pic
+                max-height: 150px
+                max-width: 150px
             
-            .user-text-content-hide
+            .square-pic
+                width: 32%
                 overflow hidden
-                text-overflow: ellipsis
-                display: -webkit-box
-                -webkit-line-clamp: 3
-                -webkit-box-orient: vertical
 
-            .moment-pic-wrapper
-                margin: 10px 0
-
-                .single-pic
-                    max-height: 150px
-                    max-width: 150px
-                
-                .square-pic
-                    width: 32%
-                    overflow hidden
-
-                    &:after 
-                        content: ''
-                        display: block
-                        margin-top: 100%
-                
-                .dummy-pic
-                    background: #fff
-  
-                .one-line-pic
-                    display flex
-                    flex-flow: row nowrap
-                    justify-content space-between
-
-                .multi-line-margin
-                    margin-bottom: 2%
-
-            .content-control-button
-                line-height 16px
-                font-size 15px
-                color #576b95
-                margin: 10px 0
+                &:after 
+                    content: ''
+                    display: block
+                    margin-top: 100%
             
-            .user-action-line
-                margin-top 10px
+            .dummy-pic
+                background: #fff
+
+            .one-line-pic
+                display flex
+                flex-flow: row nowrap
+                justify-content space-between
+
+            .multi-line-margin
+                margin-bottom: 2%
+
+        .content-control-button
+            line-height 16px
+            font-size 15px
+            color #576b95
+            margin: 10px 0
+        
+        .user-action-line
+            margin-top 10px
+            height 20px
+            display flex
+            flex-flow row nowrap
+            position relative
+
+            .mask
+                position fixed
+                top: 0
+                left 0
+                height 100%
+                width: 100%
+                background: rgba(0,0,0, .01)
+                z-index: 1
+
+            .post-info
+                flex 1
+                line-height 20px
+                font-size 14px
+                color #c9c9c9
+
+                .other-info
+                    padding-left 5px
+
+            .enable-action-line-button
                 height 20px
+                line-height 20px
+                border-radius 3px
+                font-size 14px
+                width 33px
+                background #f7f7f7
+                color: #576b95
+                text-align center
+
+            .action-button-bar-wrapper
+                position absolute
+                right 40px
+                bottom -10px
+                width: 180px
+                height 40px
+                overflow hidden
+                transition width .3s
+                z-index 2
+
+            .action-button-bar
+                width: 180px
+                height 40px 
+                background: #4c5254
+                border-radius 5px
                 display flex
                 flex-flow row nowrap
-                position relative
 
-                .mask
-                    position fixed
-                    top: 0
-                    left 0
-                    height 100%
-                    width: 100%
-                    background: rgba(0,0,0, .01)
-                    z-index: 1
+                .action-button
+                    flex: 1
+                    text-align: center
+                    font-size: 15px
+                    line-height: 40px
+                    color: #fff
+                    position: relative
 
-                .post-info
-                    flex 1
-                    line-height 20px
-                    font-size 14px
-                    color #c9c9c9
+                    &:after
+                        content: ' '
+                        background: #373d40
+                        height 40px
+                        width: 1px
+                        display inline-block
+                        position absolute
+                        right 0
+                        transform: scale(0.5)
 
-                    .other-info
-                        padding-left 5px
-
-                .enable-action-line-button
-                    height 20px
-                    line-height 20px
-                    border-radius 3px
-                    font-size 14px
-                    width 33px
-                    background #f7f7f7
-                    color: #576b95
-                    text-align center
-
-                .action-button-bar-wrapper
-                    position absolute
-                    right 40px
-                    bottom -10px
-                    width: 180px
-                    height 40px
-                    overflow hidden
-                    transition width .3s
-                    z-index 2
-
-                .action-button-bar
-                    width: 180px
-                    height 40px 
-                    background: #4c5254
-                    border-radius 5px
-                    display flex
-                    flex-flow row nowrap
-
-                    .action-button
-                        flex: 1
-                        text-align: center
-                        font-size: 15px
-                        line-height: 40px
-                        color: #fff
-                        position: relative
-
+                    &:last-child
                         &:after
-                            content: ' '
-                            background: #373d40
-                            height 40px
-                            width: 1px
-                            display inline-block
-                            position absolute
-                            right 0
-                            transform: scale(0.5)
+                            background transparent
+    .friend-comment
+        margin-top: 10px
+        background: #f3f3f5
+        position relative
+        color #576b95
 
-                        &:last-child
-                            &:after
-                                background transparent
+        &:after
+            content: ' '
+            display inline-block
+            height 0px
+            width 0px
+            position absolute
+            top: -5px
+            left 6px
+            border-width: 0 6px 6px
+            border-style: solid
+            border-color: transparent transparent #f3f3f5
 
+    .like-list
+        line-height 20px
+        font-size: 15px
+        padding: 5px 5px
+
+        &:nth-last-child(2)
+            border-bottom-one-px()
+
+        .user-name
+            &:first-child
+                margin-left: 7px
+            &:after 
+                content: ', '
+                color: #000
+            &:last-child
+                &:after 
+                    content: ''
+
+        .black-indent
+            color: #fff
+    .friend-comments
+        line-height 20px
+        font-size: 15px
+        padding: 5px 5px
+
+        .friend-comment-item
+            margin-bottom: 2px
+
+            .normal-text
+                color: #000
+                margin: 0 2px 0 1px
+
+            &:last-child
+                margin-bottom: 0
 
 

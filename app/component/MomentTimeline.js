@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import WxImageViewer from 'react-wx-images-viewer'
 
 import Weblink from '@component/Weblink'
+import { list } from 'postcss'
 
 const renderTextWithLines = str =>
   str.split('\n')
     .map(
       (_, i) => <p className='moment-text-line' key={i}>{_}</p>
     )
+
+const friendComments = [
+  { user: '子阳', to: null, comment: '今天这个代码好难写鸭' },
+  { user: '韩昂', to: '子阳', comment: '加油啦' },
+]
 
 export default class MomentTimeline extends Component {
     state = {
@@ -17,7 +23,8 @@ export default class MomentTimeline extends Component {
       isOpen: false,
       index: 0,
       actionBar: false,
-      likeList: [],
+      likeList: ['zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi', 'zzzz'],
+      friendComments: friendComments,
     }
     reveseActionBarStatus = () => {
       this.setState({actionBar: !this.state.actionBar})
@@ -188,18 +195,53 @@ export default class MomentTimeline extends Component {
           3小时前
           <span className="other-info">知乎APP</span>
         </div>
-        <div 
+        <div
           onClick={this.reveseActionBarStatus}
           className="enable-action-line-button">
           • •
         </div>
         <div className="action-button-bar-wrapper" style={actionBar ? {} : {width: 0}}>
           <div className="action-button-bar">
-          <div className="action-button" onClick={this.likeit}><i className='iconfont icon-heart' /> 赞</div>
-          <div className="action-button" onClick={this.sendComment}><i className='iconfont icon-comment' /> 评论</div>
+            <div className="action-button" onClick={this.likeit}><i className='iconfont icon-heart' /> 赞</div>
+            <div className="action-button" onClick={this.sendComment}><i className='iconfont icon-comment' /> 评论</div>
           </div>
         </div>
         { actionBar && <div onTouchMove={this.reveseActionBarStatus} onClick={this.reveseActionBarStatus} className="mask"></div> }
+      </div>
+    }
+    renderFriendComment = () => {
+      const { likeList, friendComments } = this.state
+      if (likeList.length === 0 && friendComments.length === 0) { return null }
+      return <div className='friend-comment'>
+        {
+          likeList.length > 0 && <div className="like-list">
+            <i className='iconfont icon-heart' />
+            <span className="name-list">
+              {likeList.map((_, i) => <span className='user-name' key={i}>{_}</span>)}
+            </span>
+          </div>
+        }
+        {
+          friendComments.length > 0 && <div className='friend-comments'>
+            {
+              friendComments.map((_, i) => {
+                return <div className='friend-comment-item' key={i}>
+                  {_.user}
+                  {
+                    _.to ?
+                      <span>
+                        <span className='normal-text'>回复</span>
+                        {_.to}
+                        <span className='normal-text'>:</span>
+                      </span> :
+                      <span className='normal-text'>:</span>
+                  }
+                  <span className='normal-text'>{_.comment}</span>
+                </div>
+              })
+            }
+          </div>
+        }
       </div>
     }
     render() {
@@ -214,6 +256,7 @@ export default class MomentTimeline extends Component {
             { this.renderImgViewer() }
             { this.renderWebLink() }
             { this.renderActionLine() }
+            { this.renderFriendComment() }
           </div>
         </div>
       </div>
