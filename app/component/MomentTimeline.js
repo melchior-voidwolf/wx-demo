@@ -23,8 +23,12 @@ export default class MomentTimeline extends Component {
       isOpen: false,
       index: 0,
       actionBar: false,
-      likeList: ['zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi','zizi', 'zzzz'],
+      likeList: ['zizi'],
       friendComments: friendComments,
+      tempReply: '',
+      replyMode: false,
+      replayInfo: {},
+      user: '空破'
     }
     reveseActionBarStatus = () => {
       this.setState({actionBar: !this.state.actionBar})
@@ -186,6 +190,8 @@ export default class MomentTimeline extends Component {
     sendComment = () => {
       this.setState ({
         actionBar: false,
+        replyMode: true,
+        replayInfo: {},
       })
     }
     renderActionLine = () => {
@@ -225,7 +231,7 @@ export default class MomentTimeline extends Component {
           friendComments.length > 0 && <div className='friend-comments'>
             {
               friendComments.map((_, i) => {
-                return <div className='friend-comment-item' key={i}>
+                return <div className='friend-comment-item' key={i} onClick={this.replayFriendComment(_)}>
                   {_.user}
                   {
                     _.to ?
@@ -244,12 +250,69 @@ export default class MomentTimeline extends Component {
         }
       </div>
     }
+    renderReplyInput = () => {
+      const { replyMode, tempReply, replayTarget } = this.state
+      return replyMode && <div className="reply-input">
+        <div className="mask" onClick={() => this.setState({replyMode: false})}></div>
+        <div className="reply-input-wrapper">
+          <input
+            onKeyUp={ e =>
+              e.keyCode === 13 && this.postReply()
+            }
+            placeholder={replayTarget.comment ? `回复${replayTarget.comment.user}` : '评论'}
+            type="text" className="replay-input" onChange={this._handleInput} value={tempReply} />
+          <div className="cancel-input" onClick={this.cancelInput}>取消</div>
+        </div>
+      </div>
+    }
+    replayFriendComment = (comment) => () => {
+      this.setState({
+        replayTarget: {comment},
+        tempReply: '',
+        replyMode: true,
+      })
+    }
+    _handleInput = (e) => {
+      const { tempReply } = this.state
+      this.setState({
+        tempReply: e.target.value
+      })
+    }
+    cancelInput = () => {
+      this.setState({
+        replayTarget: {},
+        tempReply: '',
+        replyMode: false,
+      })
+    }
+    postReply = () => {
+      const { friendComments, replayInfo, tempReply, user } = this.state
+      if (tempReply.length <= 0) { return null }
+      friendComments.push(
+        replayInfo.comment ? {
+          user: '子空',
+          to: replayInfo.user,
+          comment: tempReply
+        } : {
+          user: '子空',
+          to: user,
+          comment: tempReply
+        }
+      )
+      this.setState({
+        replayTarget: {},
+        tempReply: '',
+        replyMode: false,
+        friendComments,
+      })
+    }
     render() {
+      const { user } = this.state
       return <div className="moment-timeline" ref='moment'>
         <div className="moment-timeline-block">
           <div className="user-avator"></div>
           <div className="moment-main">
-            <div className="user-name">我终于</div>
+            <div className="user-name">{user}</div>
             { this.renderCommentText() }
             { this.renderTextControlButton() }
             { this.renderPics() }
@@ -257,6 +320,7 @@ export default class MomentTimeline extends Component {
             { this.renderWebLink() }
             { this.renderActionLine() }
             { this.renderFriendComment() }
+            { this.renderReplyInput() }
           </div>
         </div>
       </div>

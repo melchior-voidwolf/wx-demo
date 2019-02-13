@@ -4,13 +4,10 @@ import MomentTimeline from '@component/MomentTimeline'
 import Titlebar from '@component/Titlebar'
 
 const momentText =
-`稳扎稳打被憋我憋不出稳扎稳打被
-憋我憋不出稳扎稳打被憋我憋不出稳扎稳
-
-打被憋我憋不出稳扎稳打被憋我憋不出稳扎
-稳打被憋我憋不出稳扎稳打被憋我憋不出稳扎
-
-稳打被憋我憋不出稳扎稳打被憋我憋不出`
+`世之奇伟、瑰怪、非常之观，常在于险远，而人之所罕至焉，故非有志者不能至也
+苟利国家生死以
+在使用React时需要给页面绑定一个键盘按下的事件，绑定后按下键盘并没有反应
+`
 
 const wlDemo = {
   uri: 'http://www.zuimoban.com/jiaocheng/htmlcss/11742.html',
@@ -102,7 +99,7 @@ class HomePage extends Component {
       <MomentTimeline momentText={momentText} picList={picList} />
       <MomentTimeline momentText={momentText} picList={picList6}/>
       <MomentTimeline momentText={momentText} picList={picList2} weblink={wlDemo} />
-      <MomentTimeline momentText={'我爱吃黄桃我爱吃黄桃我爱吃黄桃'} picList={picList3} />
+      <MomentTimeline momentText={'我爱写代码我爱写代码'} picList={picList3} />
       <MomentTimeline momentText={momentText} picList={picList4}/>
       <MomentTimeline momentText={momentText} picList={picList5}/>
       <Titlebar style={{opacity: titleOpacity}} />

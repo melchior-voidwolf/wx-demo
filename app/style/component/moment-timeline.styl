@@ -4,6 +4,15 @@
     padding 16px 9px 10px 9px
     border-bottom-one-px()
 
+    .mask
+        position fixed
+        top: 0
+        left 0
+        height 100%
+        width: 100%
+        background: rgba(0,0,0, .01)
+        z-index: 1
+
     .user-avator
         height 42px
         width 42px
@@ -45,6 +54,9 @@
             .single-pic
                 max-height: 150px
                 max-width: 150px
+                min-height: 75px
+                min-width: 75px
+                object-fit: cover
             
             .square-pic
                 width: 32%
@@ -78,15 +90,6 @@
             display flex
             flex-flow row nowrap
             position relative
-
-            .mask
-                position fixed
-                top: 0
-                left 0
-                height 100%
-                width: 100%
-                background: rgba(0,0,0, .01)
-                z-index: 1
 
             .post-info
                 flex 1
@@ -198,5 +201,31 @@
 
             &:last-child
                 margin-bottom: 0
+    .reply-input
+        .reply-input-wrapper
+            border-top-one-px()
+            height 45px
+            width 100%
+            background #fafafa
+            position fixed
+            bottom 0
+            left 0
+            z-index 1
+            display flex
+            flex-flow: row nowrap
+            justify-content: center
+            align-items: center
 
+            .replay-input
+                border: 0
+                background: #fff
+                height 36px
+                flex: 1
+                padding: 0 10px
+                caret-color: #07c160
+                margin-left: 10px
+            .cancel-input
+                color: #d5d5d5
+                padding 0 10px
+                line-height 36px
 
