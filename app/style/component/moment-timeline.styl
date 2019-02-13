@@ -1,7 +1,7 @@
     .moment-timeline-block
         display flex
         flex-flow row nowrap
-        padding 16px 10px 10px 10px
+        padding 16px 9px 10px 9px
         border-bottom-one-px()
 
         .user-avator
@@ -38,7 +38,33 @@
                 display: -webkit-box
                 -webkit-line-clamp: 3
                 -webkit-box-orient: vertical
-            
+
+            .moment-pic-wrapper
+                margin: 10px 0
+
+                .single-pic
+                    max-height: 150px
+                    max-width: 150px
+                
+                .square-pic
+                    width: 32%
+                    overflow hidden
+
+                    &:after 
+                        content: ''
+                        display: block
+                        margin-top: 100%
+                
+                .dummy-pic
+                    background: #fff
+  
+                .one-line-pic
+                    display flex
+                    flex-flow: row nowrap
+                    justify-content space-between
+
+                .multi-line-margin
+                    margin-bottom: 2%
 
             .content-control-button
                 line-height 16px

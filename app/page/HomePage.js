@@ -12,6 +12,50 @@ const momentText =
 
 稳打被憋我憋不出稳扎稳打被憋我憋不出`
 
+const wlDemo = {
+  uri: 'http://www.zuimoban.com/jiaocheng/htmlcss/11742.html',
+  intro: '小米发布新手机啦～～～'
+}
+
+const picList = [
+  { name: 'vl.jpg', uri: '/img/vl.jpg' }
+]
+
+const picList2 = [
+  { name: 'vw.jpg', uri: '/img/vw.jpg' }
+]
+
+const picList3 = [
+  { name: 'vl.jpg', uri: '/img/vl.jpg', id: 1, },
+  { name: 'vw.jpg', uri: '/img/vw.jpg', id: 2, },
+]
+
+const picList4 = [
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 1 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 2 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 3 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 4 },
+]
+
+const picList5 = [
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 1 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 2 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 3 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 4 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 5 },
+  // { name: 'co.jpg', uri: '/img/demo.jpg', id: 6 },
+]
+
+const picList6 = [
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 1 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 2 },
+  { name: 'co.jpg', uri: 'https://idiotwu.me/content/images/2015/03/caniuse.png', id: 3 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 4 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 5 },
+  { name: 'co.jpg', uri: '/img/demo.jpg', id: 6 },
+  { name: 'vw.jpg', uri: '/img/vw.jpg', id: 7 },
+]
+
 class HomePage extends Component {
   state = {
     titleOpacity: 0
@@ -55,10 +99,12 @@ class HomePage extends Component {
           <div className="user-avator"></div>
         </div>
       </div>
-      <MomentTimeline momentText={momentText} />
-      <MomentTimeline momentText={momentText} />
-      <MomentTimeline momentText={'我爱吃黄桃我爱吃黄桃我爱吃黄桃'} />
-      <MomentTimeline momentText={momentText} />
+      <MomentTimeline momentText={momentText} picList={picList} />
+      <MomentTimeline momentText={momentText} picList={picList6}/>
+      <MomentTimeline momentText={momentText} picList={picList2} weblink={wlDemo} />
+      <MomentTimeline momentText={'我爱吃黄桃我爱吃黄桃我爱吃黄桃'} picList={picList3} />
+      <MomentTimeline momentText={momentText} picList={picList4}/>
+      <MomentTimeline momentText={momentText} picList={picList5}/>
       <Titlebar style={{opacity: titleOpacity}} />
     </div>
   }
