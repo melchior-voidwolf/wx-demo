@@ -183,7 +183,13 @@ export default class MomentTimeline extends Component {
     likeit = () => {
       this.setState ({
         actionBar: false,
-        likeList: this.state.likeList.concat('子空')
+        likeList: this.state.likeList.concat(window.localUser)
+      })
+    }
+    unLikeit = () => {
+      this.setState ({
+        actionBar: false,
+        likeList: this.state.likeList.filter(_ => _.name !== window.localUser.name)
       })
     }
     sendComment = () => {
@@ -194,8 +200,9 @@ export default class MomentTimeline extends Component {
       })
     }
     renderActionLine = () => {
-      const { actionBar } = this.state
+      const { actionBar, likeList } = this.state
       const { created, from } = this.props
+      const isLike = likeList.filter(_ => _.name === window.localUser.name).length
       return <div className="user-action-line">
         <div className="post-info">
           {moment(created).fromNow()}
@@ -208,7 +215,7 @@ export default class MomentTimeline extends Component {
         </div>
         <div className="action-button-bar-wrapper" style={actionBar ? {} : {width: 0}}>
           <div className="action-button-bar">
-            <div className="action-button" onClick={this.likeit}><i className='iconfont icon-heart' /> 赞</div>
+            <div className="action-button" onClick={isLike ? this.unLikeit :this.likeit}><i className='iconfont icon-heart' /> {isLike ? '取消' : '赞'}</div>
             <div className="action-button" onClick={this.sendComment}><i className='iconfont icon-comment' /> 评论</div>
           </div>
         </div>
