@@ -30,8 +30,11 @@ class HomePage extends Component {
   }
   refresh = () => {
     this.setState({
-      page: 1
-    }, this.props.scrollToTopWithSpeed)
+      data: []
+    }, () => {
+      this.props.scrollToTopWithSpeed()
+      this.fetchData()
+    })
   }
   fetchData = async () => {
     if (this.lock) { return null }
