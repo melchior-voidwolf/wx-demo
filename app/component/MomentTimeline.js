@@ -16,14 +16,15 @@ export default class MomentTimeline extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      likeList: props.likeList,
+      friendComments: props.friendComments,
+      // 可变化的单条数据
       textOverMode: false,
       displayAll: false,
       textOverCheck: false,
       isOpen: false,
       index: 0,
       actionBar: false,
-      likeList: props.likeList,
-      friendComments: props.friendComments,
       tempReply: '',
       replyMode: false,
       replyTarget: {},
