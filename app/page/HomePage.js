@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import MomentTimeline from '@component/MomentTimeline'
 import Titlebar from '@component/Titlebar'
+import UserBackgroundWall from '@component/UserBackgroundWall'
 import BodyScrollStausManager from '@util/BodyScrollStausManager'
 
 import getMoment from '@/asyncData/getMoments'
@@ -50,15 +51,7 @@ class HomePage extends Component {
     const { scrollTop } = this.props
     const { data } = this.state
     return <div className='home-page'>
-      <div className="user-background-wall">
-        <div className="user-background-wall">
-          <div className="wall-background-pic">
-            <div className="change-button">轻触设置相册封面</div>
-          </div>
-          <div className="user-name">{window.localUser.name}</div>
-          <div className="user-avator" style={{background: `url(${window.localUser.avator}) no-repeat center center / cover`}} ></div>
-        </div>
-      </div>
+      <UserBackgroundWall />
       {
         data.map(_ => <MomentTimeline key={_.id} {..._}/>)
       }

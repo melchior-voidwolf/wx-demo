@@ -4,7 +4,6 @@ export default class Titlebar extends Component {
   lock = false
   prevMark = false
   doubleClickHandle = () => {
-    console.log(1)
     const { onDoubleClick } = this.props
     if (!onDoubleClick) { return null }
     if (this.lock) { return null }

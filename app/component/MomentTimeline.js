@@ -239,7 +239,6 @@ export default class MomentTimeline extends Component {
           friendComments.length > 0 && <div className='friend-comments'>
             {
               friendComments.map((_, i) => {
-                console.log(_)
                 return <div className='friend-comment-item' key={i} onClick={this.replayFriendComment(_)}>
                   {_.user.name}
                   {
