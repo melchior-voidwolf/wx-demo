@@ -10,7 +10,7 @@ import '@style/index.styl'
 window.localUser = {
   name: '子空',
   id: 'void-me',
-  avator: '/img/1.jpg'
+  avator: './img/1.jpg'
 }
 
 const inGHP = window.location.href.indexOf('wx-demo') > 0 ? '/wx-demo' : ''
