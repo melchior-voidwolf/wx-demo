@@ -13,11 +13,13 @@ window.localUser = {
   avator: '/img/1.jpg'
 }
 
+const inGHP = window.location.href.indexOf('wx-demo') > 0 ? '/wx-demo' : ''
+
 render(
   <Router>
     <div className='full-size'>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/webview" component={Webview} />
+      <Route exact path={inGHP + "/"} component={HomePage} />
+      <Route path={inGHP + "/webview"} component={Webview} />
     </div>
   </Router>,
   document.getElementById('root')

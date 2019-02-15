@@ -1,5 +1,5 @@
 
-const getRandomPic = () => `/img/${~~(Math.random()*10)}.jpg`
+const getRandomPic = () => `./img/${~~(Math.random()*10)}.jpg`
 const getRandomId = () => `id-${~~(Math.random() * 20)}`
 
 const getRandomUser = () => {
