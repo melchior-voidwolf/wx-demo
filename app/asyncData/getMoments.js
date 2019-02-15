@@ -34,10 +34,12 @@ const getRandomComment = () => `第二次冲击十五年后的2015年，不明�
 
 
 const gen = () => [...'1'.repeat(10)].map((_, i) => {
+  const tempUser = getRandomUser()
   return ({
     user: getRandomUser(),
     momentText: getRandomComment(),
     picList: [...'1'.repeat(i)].slice(0,8).map(_ => ({
+      id: Math.random(),
       name: 'demo.jpg',
       uri: getRandomPic()
     })),
@@ -46,14 +48,14 @@ const gen = () => [...'1'.repeat(10)].map((_, i) => {
     created: new Date().getTime() * (1 - 0.00001*Math.random()),
     from: Math.random() > 0.8 ? '微博APP' : null,
     friendComments: [
-      { user: getRandomUser(), to: null, comment: 'eva真好看，下次有机会一起去国外看剧场版' },
-      { user: getRandomUser(), to: getRandomUser(), comment: '好啊' },
+      { user: tempUser, to: null, comment: 'eva真好看，下次有机会一起去国外看剧场版' },
+      { user: getRandomUser(), to: tempUser, comment: '好啊' },
     ],
     likeList: [
       getRandomUser(), getRandomUser(), getRandomUser(), getRandomUser()
     ]
   })
-})
+}).sort((a, b) => b.created - a.created)
 
 const getMoments = gen
 
