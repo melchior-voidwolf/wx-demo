@@ -46,7 +46,7 @@ const config = {
     ]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'docs'),
+    static: path.resolve(__dirname, 'docs'),
     historyApiFallback: true,
     compress: true,
     open: false,
